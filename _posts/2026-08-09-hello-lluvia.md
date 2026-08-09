@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "雨落下时，我开始记录"
-subtitle: "Welcome to LLUVIA's THINGS ABOUT WORLD"
+title: 雨落下时，我开始记录
+subtitle: Welcome to LLUVIA's THINGS ABOUT WORLD
 date: 2026-08-09 12:00:00 +0800
-author: "GuoZiqiang198"
-header-img: "img/lluvia-rain-header.png"
-header-mask: 0.35
+author: GuoZiqiang198
+header-img: img/lluvia-rain-header.png
+header-mask: 1
 catalog: true
 tags:
   - 随笔
