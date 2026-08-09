@@ -1,0 +1,219 @@
+---
+layout: page
+title: "写文章"
+description: "进入 LLUVIA 创作台"
+header-img: "img/lluvia-rain-header.png"
+header-mask: 0.55
+permalink: /write/
+---
+
+<style>
+  .writing-portal {
+    --ink: #10283d;
+    --rain: #4e7f9f;
+    --paper: #fffdf7;
+    position: relative;
+    max-width: 820px;
+    margin: 10px auto 56px;
+    padding: clamp(28px, 6vw, 64px);
+    overflow: hidden;
+    color: var(--ink);
+    background:
+      linear-gradient(90deg, transparent 0 46px, rgba(173, 79, 63, .24) 46px 47px, transparent 47px),
+      repeating-linear-gradient(0deg, transparent 0 31px, rgba(78, 127, 159, .12) 31px 32px),
+      var(--paper);
+    border: 1px solid rgba(16, 40, 61, .14);
+    box-shadow: 0 24px 70px rgba(16, 40, 61, .14);
+  }
+
+  .writing-portal::before {
+    content: "";
+    position: absolute;
+    top: -54px;
+    right: -48px;
+    width: 190px;
+    height: 190px;
+    border: 1px solid rgba(78, 127, 159, .2);
+    border-radius: 50%;
+    box-shadow: 0 0 0 28px rgba(78, 127, 159, .06), 0 0 0 56px rgba(78, 127, 159, .035);
+    pointer-events: none;
+  }
+
+  .writing-portal__eyebrow {
+    margin: 0 0 14px;
+    color: var(--rain);
+    font: 700 12px/1.4 "Courier New", monospace;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+  }
+
+  .writing-portal h2 {
+    max-width: 620px;
+    margin: 0;
+    color: var(--ink);
+    font-family: "STSong", "SimSun", serif;
+    font-size: clamp(34px, 6vw, 62px);
+    font-weight: 500;
+    line-height: 1.08;
+    letter-spacing: -.035em;
+  }
+
+  .writing-portal__lead {
+    max-width: 590px;
+    margin: 24px 0 30px;
+    font-size: 17px;
+    line-height: 1.9;
+  }
+
+  .writing-portal__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+
+  .writing-portal__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
+    padding: 0 24px;
+    border: 1px solid var(--ink);
+    border-radius: 0;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-decoration: none !important;
+    transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease;
+  }
+
+  .writing-portal__button--primary {
+    color: #fff !important;
+    background: var(--ink);
+    box-shadow: 6px 6px 0 var(--rain);
+  }
+
+  .writing-portal__button--secondary {
+    color: var(--ink) !important;
+    background: rgba(255, 253, 247, .72);
+  }
+
+  .writing-portal__button:hover,
+  .writing-portal__button:focus {
+    transform: translate(-2px, -2px);
+  }
+
+  .writing-portal__button--primary:hover,
+  .writing-portal__button--primary:focus {
+    background: #173b59;
+    box-shadow: 9px 9px 0 var(--rain);
+  }
+
+  .writing-portal__steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    margin: 0;
+    padding: 1px;
+    list-style: none;
+    background: rgba(16, 40, 61, .14);
+  }
+
+  .writing-portal__steps li {
+    min-height: 132px;
+    padding: 20px;
+    background: rgba(255, 253, 247, .94);
+  }
+
+  .writing-portal__steps span {
+    display: block;
+    margin-bottom: 14px;
+    color: var(--rain);
+    font: 700 12px/1 "Courier New", monospace;
+  }
+
+  .writing-portal__steps strong {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+  }
+
+  .writing-portal__steps p {
+    margin: 0;
+    color: #516273;
+    font-size: 13px;
+    line-height: 1.65;
+  }
+
+  .writing-portal__security {
+    margin: 24px 0 0;
+    padding-left: 18px;
+    border-left: 3px solid var(--rain);
+    color: #516273;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  @media (max-width: 720px) {
+    .writing-portal {
+      padding: 32px 24px;
+      background:
+        repeating-linear-gradient(0deg, transparent 0 31px, rgba(78, 127, 159, .1) 31px 32px),
+        var(--paper);
+    }
+
+    .writing-portal__steps {
+      grid-template-columns: 1fr;
+    }
+
+    .writing-portal__actions,
+    .writing-portal__button {
+      width: 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .writing-portal__button {
+      transition: none;
+    }
+  }
+</style>
+
+<section class="writing-portal" aria-labelledby="writing-portal-title">
+  <p class="writing-portal__eyebrow">Owner's writing desk · LLUVIA</p>
+  <h2 id="writing-portal-title">把今天的想法，写进雨里。</h2>
+  <p class="writing-portal__lead">
+    这是网站所有者的创作入口。首次使用先通过 GitHub Token 登录；之后点击主按钮，就会直接进入新文章编辑表单。
+  </p>
+
+  <div class="writing-portal__actions">
+    <a class="writing-portal__button writing-portal__button--primary" href="{{ '/admin/#/collections/posts/new' | prepend: site.baseurl }}">
+      创建新文章&nbsp; →
+    </a>
+    <a class="writing-portal__button writing-portal__button--secondary" href="{{ '/admin/' | prepend: site.baseurl }}">
+      管理已有文章
+    </a>
+  </div>
+
+  <ol class="writing-portal__steps" aria-label="发布文章的三个步骤">
+    <li>
+      <span>01 / LOGIN</span>
+      <strong>验证身份</strong>
+      <p>使用 GitHub 页面生成的 Token 登录，只在自己的可信浏览器操作。</p>
+    </li>
+    <li>
+      <span>02 / WRITE</span>
+      <strong>专注写作</strong>
+      <p>填写标题、标签和正文，也可以上传文章头图。</p>
+    </li>
+    <li>
+      <span>03 / PUBLISH</span>
+      <strong>直接发布</strong>
+      <p>保存后提交到 main，GitHub Pages 自动更新网站。</p>
+    </li>
+  </ol>
+
+  <p class="writing-portal__security">
+    安全提示：本页不保存任何密码或 Token。不要在公共电脑登录，也不要把 Token 发到聊天、截图或仓库中。
+  </p>
+</section>

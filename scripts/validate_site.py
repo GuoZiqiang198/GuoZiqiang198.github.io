@@ -110,8 +110,13 @@ def validate() -> None:
             if required_key not in post_data:
                 raise ValueError(f"{post.name} is missing {required_key!r}")
 
-    for page_name in ("index.html", "about.html", "archive.html", "404.html"):
+    for page_name in ("index.html", "about.html", "archive.html", "write.html", "404.html"):
         load_front_matter(ROOT / page_name)
+
+    write_page = (ROOT / "write.html").read_text(encoding="utf-8")
+    for fragment in ("permalink: /write/", "/admin/#/collections/posts/new", "创建新文章"):
+        if fragment not in write_page:
+            raise ValueError(f"Missing writing portal setting: {fragment}")
 
     validate_admin()
 
