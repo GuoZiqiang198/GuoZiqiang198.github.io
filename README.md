@@ -21,7 +21,7 @@ YYYY-MM-DD-post-slug.md
 ### Write in the browser
 
 1. Open `https://guoziqiang198.github.io/admin/` in a trusted personal browser.
-2. Select **Sign In with Token**. Use the GitHub link shown by the editor to create a fine-grained token limited to this repository.
+2. Select **Sign In with Token**. Use the GitHub link shown by the editor to create a PAT with the requested permissions; choose a short expiration and grant no extra access.
 3. Paste the token into the editor prompt. Never paste it into source files, commits, screenshots, or chat messages.
 4. Open **文章**, create or edit a post, and select **发布**. The editor commits the Markdown file directly to `main`; GitHub Pages then rebuilds the site.
 
