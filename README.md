@@ -6,8 +6,8 @@ Personal Jekyll blog for `https://guoziqiang198.github.io`, based on the open-so
 
 1. Push this directory to the public repository `GuoZiqiang198.github.io`.
 2. Open **Settings → Pages** in the GitHub repository.
-3. Under **Build and deployment**, set **Source** to **GitHub Actions**.
-4. Open the **Actions** tab and wait for `Deploy Jekyll site to Pages` to complete.
+3. Under **Build and deployment**, set **Source** to **Deploy from a branch**.
+4. Select `main` and `/(root)`, then wait for `pages build and deployment` to complete.
 5. Visit `https://guoziqiang198.github.io`.
 
 ## Write a post
