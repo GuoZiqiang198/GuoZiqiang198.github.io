@@ -1,0 +1,32 @@
+---
+title: "Archive"
+layout: default
+description: "文章归档"
+header-img: "img/lluvia-rain-header.png"
+header-mask: 0.4
+---
+
+{% include intro-header.html type='page' short=true %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            {% assign posts_by_year = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
+            {% for year in posts_by_year %}
+            <section class="mini-post-list">
+                <h2>{{ year.name }}</h2>
+                {% for post in year.items %}
+                <div class="post-preview">
+                    <a href="{{ post.url | prepend: site.baseurl }}">
+                        <h3 class="post-title">{{ post.title }}</h3>
+                        {% if post.subtitle %}<p>{{ post.subtitle }}</p>{% endif %}
+                    </a>
+                    <p class="post-meta">{{ post.date | date: "%Y-%m-%d" }}</p>
+                </div>
+                <hr>
+                {% endfor %}
+            </section>
+            {% endfor %}
+        </div>
+    </div>
+</div>

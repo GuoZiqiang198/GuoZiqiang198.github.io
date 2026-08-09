@@ -1,0 +1,101 @@
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                {% include sns-links.html center=true %}
+                <p class="copyright text-muted">
+                    Copyright &copy; {{ site.title }} {{ site.time | date: '%Y' }}
+                    <br>
+                    Powered by <a href="https://huangxuan.me">Hux Blog</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="{{ '/js/jquery.min.js' | prepend: site.baseurl }}"></script>
+<script src="{{ '/js/bootstrap.min.js' | prepend: site.baseurl }}"></script>
+<script src="{{ '/js/hux-blog.min.js' | prepend: site.baseurl }}"></script>
+<script src="{{ '/js/simple-jekyll-search.min.js' | prepend: site.baseurl }}"></script>
+
+<script>
+    function asyncLoad(url, callback) {
+        var documentRef = document;
+        var script = documentRef.createElement('script');
+        var firstScript = documentRef.getElementsByTagName('script')[0];
+        script.src = url;
+        if (callback) script.addEventListener('load', callback, false);
+        firstScript.parentNode.insertBefore(script, firstScript);
+    }
+</script>
+
+{% unless page.no-catalog %}
+<script>
+    function generateCatalog(selector) {
+        var container = $('div.post-container');
+        var headings = container.find('h1,h2,h3,h4,h5,h6');
+        $(selector).html('');
+        headings.each(function () {
+            var tagName = $(this).prop('tagName').toLowerCase();
+            var target = '#' + $(this).prop('id');
+            var title = $(this).text();
+            var link = $('<a href="' + target + '" rel="nofollow">' + title + '</a>');
+            $(selector).append($('<li class="' + tagName + '_nav"></li>').append(link));
+        });
+    }
+
+    generateCatalog('.catalog-body');
+    $('.catalog-toggle').click(function (event) {
+        event.preventDefault();
+        $('.side-catalog').toggleClass('fold');
+    });
+
+    asyncLoad("{{ '/js/jquery.nav.js' | prepend: site.baseurl }}", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: 'active',
+            easing: 'swing',
+            scrollSpeed: 700,
+            scrollThreshold: 0.2,
+            padding: 80
+        });
+    });
+</script>
+{% endunless %}
+
+<script>
+    function htmlDecode(input) {
+        var element = document.createElement('textarea');
+        element.innerHTML = input;
+        return element.childNodes.length === 0 ? '' : element.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '{{ site.baseurl }}/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        templateMiddleware: function (property, value) {
+            return property === 'subtitle' || property === 'title' ? htmlDecode(value) : value;
+        }
+    });
+
+    $(document).ready(function () {
+        var searchPage = $('.search-page');
+        var searchInput = $('#search-input');
+        var body = $('body');
+        $('.search-icon').on('click', function (event) {
+            event.preventDefault();
+            searchPage.toggleClass('search-active');
+            body.toggleClass('no-scroll', searchPage.hasClass('search-active'));
+            if (searchPage.hasClass('search-active')) searchInput.focus();
+        });
+        $('.search-icon-close').on('click', function (event) {
+            event.preventDefault();
+            searchPage.removeClass('search-active');
+            body.removeClass('no-scroll');
+        });
+    });
+</script>

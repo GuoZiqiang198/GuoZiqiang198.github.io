@@ -1,0 +1,48 @@
+# Site settings
+title: "LLUVIA's THINGS ABOUT WORLD"
+SEOTitle: "LLUVIA's THINGS ABOUT WORLD"
+header-img: "img/lluvia-rain-header.png"
+description: "记录技术、学习与对世界的观察。"
+keyword: "LLUVIA, GuoZiqiang198, 个人博客, 学习笔记, 技术, 世界"
+url: "https://guoziqiang198.github.io"
+baseurl: ""
+timezone: "Asia/Hong_Kong"
+future: false
+
+# Social links
+RSS: true
+github_username: "GuoZiqiang198"
+
+# Build settings
+highlighter: rouge
+permalink: pretty
+paginate: 10
+plugins:
+  - jekyll-paginate
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter_opts:
+    span:
+      line_numbers: false
+    block:
+      line_numbers: true
+      start_line: 1
+
+exclude:
+  - .codex
+  - less
+  - node_modules
+  - README.md
+
+# Theme features
+anchorjs: true
+sidebar: true
+sidebar-about-description: "记录技术、学习与对世界的观察。"
+sidebar-avatar: "https://github.com/GuoZiqiang198.png"
+featured-tags: true
+featured-condition-size: 0
+page-mathjax: false
+chrome-tab-theme-color: "#10283d"
+service-worker: false
