@@ -1,0 +1,82 @@
+backend:
+  name: github
+  repo: GuoZiqiang198/GuoZiqiang198.github.io
+  branch: main
+  auth_methods: [token]
+  commit_messages:
+    create: '文章：新建“{{slug}}”'
+    update: '文章：更新“{{slug}}”'
+    delete: '文章：删除“{{slug}}”'
+    uploadMedia: '图片：上传“{{path}}”'
+    deleteMedia: '图片：删除“{{path}}”'
+
+site_url: https://guoziqiang198.github.io
+display_url: https://guoziqiang198.github.io
+logo_url: https://guoziqiang198.github.io/img/lluvia-rain-header.png
+
+media_folder: img/uploads
+public_folder: /img/uploads
+publish_mode: simple
+
+slug:
+  encoding: unicode
+  clean_accents: true
+  sanitize_replacement: '-'
+
+collections:
+  - name: posts
+    label: 文章
+    label_singular: 文章
+    folder: _posts
+    create: true
+    delete: true
+    format: yaml-frontmatter
+    extension: md
+    slug: "{{date | date('YYYY-MM-DD')}}-{{slug}}"
+    summary: "{{title}} — {{date}}"
+    fields:
+      - label: 布局
+        name: layout
+        widget: hidden
+        default: post
+      - label: 标题
+        name: title
+        widget: string
+      - label: 副标题
+        name: subtitle
+        widget: string
+        required: false
+      - label: 发布日期
+        name: date
+        widget: datetime
+        default: "{{now}}"
+        input_timezone: Asia/Hong_Kong
+        output_utc: false
+      - label: 作者
+        name: author
+        widget: hidden
+        default: GuoZiqiang198
+      - label: 头图
+        name: header-img
+        widget: image
+        default: /img/lluvia-rain-header.png
+        required: false
+      - label: 头图遮罩
+        name: header-mask
+        widget: number
+        value_type: float
+        min: 0
+        max: 1
+        step: 0.05
+        default: 0.35
+      - label: 显示目录
+        name: catalog
+        widget: boolean
+        default: true
+      - label: 标签
+        name: tags
+        widget: list
+        required: false
+      - label: 正文
+        name: body
+        widget: markdown

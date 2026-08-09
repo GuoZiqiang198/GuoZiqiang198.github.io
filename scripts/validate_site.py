@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 from typing import Any
 
@@ -37,6 +38,38 @@ def load_front_matter(path: Path) -> dict[str, Any]:
     if len(parts) != 3:
         raise ValueError(f"Unclosed YAML front matter in {path}")
     return parse_top_level_scalars(parts[1])
+
+
+def validate_admin() -> None:
+    admin_index = (ROOT / "admin" / "index.html").read_text(encoding="utf-8")
+    cms_config = (ROOT / "admin" / "config.yml").read_text(encoding="utf-8")
+
+    expected_index_fragments = (
+        '<meta name="robots" content="noindex, nofollow">',
+        "https://unpkg.com/@sveltia/cms@0.176.0/dist/sveltia-cms.js",
+    )
+    expected_config_fragments = (
+        "name: github",
+        "repo: GuoZiqiang198/GuoZiqiang198.github.io",
+        "branch: main",
+        "auth_methods: [token]",
+        "folder: _posts",
+        "format: yaml-frontmatter",
+        "media_folder: img/uploads",
+        "public_folder: /img/uploads",
+        "name: body",
+        "widget: markdown",
+    )
+    for fragment in expected_index_fragments:
+        if fragment not in admin_index:
+            raise ValueError(f"Missing admin index setting: {fragment}")
+    for fragment in expected_config_fragments:
+        if fragment not in cms_config:
+            raise ValueError(f"Missing CMS config setting: {fragment}")
+
+    token_pattern = re.compile(r"\b(?:ghp_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{30,})\b")
+    if token_pattern.search(admin_index) or token_pattern.search(cms_config):
+        raise ValueError("A GitHub access token appears to be embedded in public admin files")
 
 
 def validate() -> None:
@@ -80,6 +113,8 @@ def validate() -> None:
     for page_name in ("index.html", "about.html", "archive.html", "404.html"):
         load_front_matter(ROOT / page_name)
 
+    validate_admin()
+
     forbidden = (
         "ca-pub-6487568398225121",
         "UA-49627206-1",
@@ -103,6 +138,7 @@ def validate() -> None:
 
     print(f"PASS: config keys={len(config)}, posts={len(posts)}, checked text files={len(text_files)}")
     print(f"PASS: header asset={required_assets[0].relative_to(ROOT)}")
+    print("PASS: /admin uses pinned Sveltia CMS with Token-only GitHub authentication")
     print("PASS: no CNAME or original analytics/advertising identifiers")
 
 

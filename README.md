@@ -18,6 +18,15 @@ Create a Markdown file under `_posts/` using this filename format:
 YYYY-MM-DD-post-slug.md
 ```
 
+### Write in the browser
+
+1. Open `https://guoziqiang198.github.io/admin/` in a trusted personal browser.
+2. Select **Sign In with Token**. Use the GitHub link shown by the editor to create a fine-grained token limited to this repository.
+3. Paste the token into the editor prompt. Never paste it into source files, commits, screenshots, or chat messages.
+4. Open **文章**, create or edit a post, and select **发布**. The editor commits the Markdown file directly to `main`; GitHub Pages then rebuilds the site.
+
+Sveltia CMS stores the entered token only in that browser's local storage. Sign out and clear site data on shared or untrusted computers. The public `admin/config.yml` contains repository metadata but no credential.
+
 ## Preview locally
 
 Ruby is installed at `E:\TOOLS\Ruby34-x64`. It was intentionally not added to the permanent Windows `PATH`. In each new PowerShell window, run:
