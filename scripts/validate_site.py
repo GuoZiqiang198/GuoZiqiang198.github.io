@@ -75,7 +75,8 @@ def validate_admin() -> None:
 def validate() -> None:
     config = load_yaml(ROOT / "_config.yml")
     expected = {
-        "title": "LLUVIA's THINGS ABOUT WORLD",
+        "title": "Lluvia's things about world",
+        "SEOTitle": "Lluvia's things about world",
         "url": "https://guoziqiang198.github.io",
         "baseurl": "",
         "github_username": "GuoZiqiang198",
@@ -91,6 +92,8 @@ def validate() -> None:
         ROOT / str(config["header-img"]),
         ROOT / "css" / "bootstrap.min.css",
         ROOT / "css" / "hux-blog.min.css",
+        ROOT / "css" / "lluvia-background.css",
+        ROOT / "img" / "lluvia-site-background.jpg",
         ROOT / "js" / "jquery.min.js",
         ROOT / "js" / "bootstrap.min.js",
         ROOT / "js" / "hux-blog.min.js",
@@ -112,6 +115,14 @@ def validate() -> None:
 
     for page_name in ("index.html", "about.html", "archive.html", "write.html", "404.html"):
         load_front_matter(ROOT / page_name)
+
+    background_css = (ROOT / "css" / "lluvia-background.css").read_text(encoding="utf-8")
+    if '../img/lluvia-site-background.jpg' not in background_css or "background-size: cover" not in background_css:
+        raise ValueError("Global cover background is not configured")
+
+    default_layout = (ROOT / "_layouts" / "default.html").read_text(encoding="utf-8")
+    if "page-writing-portal" not in default_layout:
+        raise ValueError("Default layout is missing page-specific background classes")
 
     write_page = (ROOT / "write.html").read_text(encoding="utf-8")
     for fragment in ("permalink: /write/", "/admin/#/collections/posts/new", "创建新文章"):

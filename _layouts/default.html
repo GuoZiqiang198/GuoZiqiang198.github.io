@@ -3,7 +3,7 @@
 
 {% include head.html %}
 
-<body ontouchstart="">
+<body class="layout-{{ page.layout | default: 'default' }}{% if page.url == '/write/' %} page-writing-portal{% endif %}" ontouchstart="">
     {% include nav.html %}
     {% include search.html %}
     {{ content }}
