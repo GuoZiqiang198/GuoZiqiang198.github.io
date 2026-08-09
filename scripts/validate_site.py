@@ -123,8 +123,10 @@ def validate() -> None:
         raise ValueError("Article glass opacity is not configured")
     if "background: rgba(250, 252, 255, 0.86);" not in background_css:
         raise ValueError("Reduced-transparency article fallback is not configured")
-    if "background: #ffffff !important;" not in background_css:
-        raise ValueError("Blank intro header is not configured")
+    if "background: transparent !important;" not in background_css or "box-shadow: none;" not in background_css:
+        raise ValueError("Transparent intro header is not configured")
+    if "footer {" not in background_css or "background: transparent;" not in background_css:
+        raise ValueError("Transparent footer is not configured")
     if "header.intro-header .header-mask" not in background_css or "background: transparent !important;" not in background_css:
         raise ValueError("Intro header mask is not disabled")
 

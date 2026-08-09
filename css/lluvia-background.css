@@ -37,8 +37,8 @@ body::after {
 }
 
 header.intro-header {
-  background: #ffffff !important;
-  box-shadow: 0 1px 0 rgba(23, 35, 52, 0.08), 0 18px 52px rgba(3, 9, 18, 0.18);
+  background: transparent !important;
+  box-shadow: none;
 }
 
 header.intro-header .header-mask {
@@ -122,11 +122,11 @@ footer {
   position: relative;
   margin-top: 34px;
   color: rgba(239, 245, 255, 0.86);
-  background: rgba(5, 10, 20, 0.8);
-  border-top: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow: 0 -18px 54px rgba(3, 9, 18, 0.26);
-  -webkit-backdrop-filter: blur(16px) saturate(120%);
-  backdrop-filter: blur(16px) saturate(120%);
+  background: transparent;
+  border-top: 0;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 footer .copyright,
