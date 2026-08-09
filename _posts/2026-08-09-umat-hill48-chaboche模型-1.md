@@ -71,7 +71,7 @@ $$\boldsymbol{\alpha}{k,new}_=\frac{\boldsymbol{\alpha}_{k,old}+\frac{2}{3}C_k,\
 
 推导如下：由演化方程
 
-$$\boldsymbol{\alpha}_k^{new}-\boldsymbol{\alpha}_{k,old}=\frac{2}{3}C_k,\Delta\lambda,\hat{\boldsymbol{n}}-\gamma_k,\boldsymbol{\alpha}_k^{new},\Delta\lambda$$
+$$\boldsymbol{\alpha}{k,new}_\boldsymbol{\alpha}_{k,old}=\frac{2}{3}C_k,\Delta\lambda,\hat{\boldsymbol{n}}-\gamma_k,\boldsymbol{\alpha}_k^{new},\Delta\lambda$$
 
 移项后即得上式。该格式对该线性常微分方程为精确积分；当 $\Delta\lambda\to\infty$ 时 $\boldsymbol{\alpha}_k$ 趋于饱和值 $(2/3)(C_k/\gamma_k),\hat{\boldsymbol{n}}$。
 
