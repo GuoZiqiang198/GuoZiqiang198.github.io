@@ -67,7 +67,7 @@ $$\dot{\boldsymbol{\alpha}}_i=\frac{2}{3}C_i\dot{\boldsymbol{\varepsilon}}^p-\ga
 
 在增量内对上述方程做向后欧拉积分（令增量内 $d\boldsymbol{\varepsilon}^p=\Delta\lambda,\hat{\boldsymbol{n}}$、$dp=\Delta\lambda$，恢复项中的 $\boldsymbol{\alpha}_k$ 取增量终点值，隐式、无条件稳定），背应力的隐式更新为
 
-$$\boldsymbol{\alpha}_k^{new}=\frac{\boldsymbol{\alpha}_{k,old}+\frac{2}{3}C_k,\Delta\lambda,\hat{\boldsymbol{n}}}{1+\gamma_k,\Delta\lambda}$$
+$$\boldsymbol{\alpha}{k,new}_=\frac{\boldsymbol{\alpha}_{k,old}+\frac{2}{3}C_k,\Delta\lambda,\hat{\boldsymbol{n}}}{1+\gamma_k,\Delta\lambda}$$
 
 推导如下：由演化方程
 
