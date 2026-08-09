@@ -43,10 +43,13 @@ def load_front_matter(path: Path) -> dict[str, Any]:
 def validate_admin() -> None:
     admin_index = (ROOT / "admin" / "index.html").read_text(encoding="utf-8")
     cms_config = (ROOT / "admin" / "config.yml").read_text(encoding="utf-8")
+    preview_js = (ROOT / "admin" / "preview.js").read_text(encoding="utf-8")
+    preview_css = (ROOT / "admin" / "preview.css").read_text(encoding="utf-8")
 
     expected_index_fragments = (
         '<meta name="robots" content="noindex, nofollow">',
         "https://unpkg.com/@sveltia/cms@0.176.0/dist/sveltia-cms.js",
+        '<script src="/admin/preview.js"></script>',
     )
     expected_config_fragments = (
         "name: github",
@@ -59,6 +62,7 @@ def validate_admin() -> None:
         "public_folder: /img/uploads",
         "name: body",
         "widget: markdown",
+        "name: mathjax",
     )
     for fragment in expected_index_fragments:
         if fragment not in admin_index:
@@ -67,8 +71,23 @@ def validate_admin() -> None:
         if fragment not in cms_config:
             raise ValueError(f"Missing CMS config setting: {fragment}")
 
+    expected_preview_fragments = (
+        "CMS.registerPreviewTemplate('posts'",
+        "CMS.registerPreviewStyle('/admin/preview.css')",
+        "mathjax@3.2.2/es5/tex-mml-chtml.js",
+        "typesetPromise",
+        "widgetFor('body')",
+        "getIn(['data', 'mathjax']) === false",
+        "dataset.lluviaMathPreview = 'registered'",
+    )
+    for fragment in expected_preview_fragments:
+        if fragment not in preview_js:
+            raise ValueError(f"Missing CMS formula preview setting: {fragment}")
+    if "mjx-container" not in preview_css:
+        raise ValueError("CMS preview stylesheet is missing MathJax layout rules")
+
     token_pattern = re.compile(r"\b(?:ghp_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{30,})\b")
-    if token_pattern.search(admin_index) or token_pattern.search(cms_config):
+    if any(token_pattern.search(text) for text in (admin_index, cms_config, preview_js)):
         raise ValueError("A GitHub access token appears to be embedded in public admin files")
 
 
@@ -93,6 +112,8 @@ def validate() -> None:
         ROOT / "css" / "bootstrap.min.css",
         ROOT / "css" / "hux-blog.min.css",
         ROOT / "css" / "lluvia-background.css",
+        ROOT / "admin" / "preview.css",
+        ROOT / "admin" / "preview.js",
         ROOT / "img" / "lluvia-site-background.jpg",
         ROOT / "js" / "jquery.min.js",
         ROOT / "js" / "bootstrap.min.js",
@@ -129,6 +150,23 @@ def validate() -> None:
         raise ValueError("Transparent footer is not configured")
     if "header.intro-header .header-mask" not in background_css or "background: transparent !important;" not in background_css:
         raise ValueError("Intro header mask is not disabled")
+    if "white-space: nowrap;" not in background_css or "@media (min-width: 768px)" not in background_css:
+        raise ValueError("Desktop single-line site title is not configured")
+
+    post_layout = (ROOT / "_layouts" / "post.html").read_text(encoding="utf-8")
+    mathjax_include = (ROOT / "_includes" / "mathjax_support.html").read_text(encoding="utf-8")
+    if "{% unless page.mathjax == false %}" not in post_layout:
+        raise ValueError("Posts do not enable MathJax by default")
+    expected_mathjax_fragments = (
+        "mathjax@3.2.2",
+        "['$', '$']",
+        "['\\\\(', '\\\\)']",
+        "['$$', '$$']",
+        "['\\\\[', '\\\\]']",
+    )
+    for fragment in expected_mathjax_fragments:
+        if fragment not in mathjax_include:
+            raise ValueError(f"Missing published MathJax setting: {fragment}")
 
     default_layout = (ROOT / "_layouts" / "default.html").read_text(encoding="utf-8")
     if "page-writing-portal" not in default_layout:

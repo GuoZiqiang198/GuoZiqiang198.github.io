@@ -73,6 +73,10 @@ collections:
         name: catalog
         widget: boolean
         default: true
+      - label: 启用公式
+        name: mathjax
+        widget: boolean
+        default: true
       - label: 标签
         name: tags
         widget: list

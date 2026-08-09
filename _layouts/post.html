@@ -97,9 +97,9 @@ layout: default
 </article>
 
 <!-- add support for mathjax by voleking-->
-{% if page.mathjax %}
+{% unless page.mathjax == false %}
   {% include mathjax_support.html %}
-{% endif %}
+{% endunless %}
 
 {% if site.netease_comment %}
 <!-- 网易云跟帖JS代码 start -->

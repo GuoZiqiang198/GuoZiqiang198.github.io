@@ -1,0 +1,74 @@
+:root {
+  color-scheme: light;
+  font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+  color: #172334;
+  background: #eef3f8;
+}
+
+body {
+  margin: 0;
+  color: #172334;
+  background: #eef3f8;
+}
+
+.lluvia-cms-preview {
+  box-sizing: border-box;
+  width: min(100% - 32px, 780px);
+  min-height: calc(100vh - 32px);
+  margin: 16px auto;
+  padding: 36px clamp(24px, 6vw, 64px) 56px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(23, 35, 52, 0.1);
+  border-radius: 18px;
+  box-shadow: 0 24px 70px rgba(23, 35, 52, 0.14);
+}
+
+.lluvia-cms-preview-header {
+  padding-bottom: 24px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid rgba(23, 35, 52, 0.12);
+}
+
+.lluvia-cms-preview-header h1 {
+  margin: 0;
+  font-size: clamp(30px, 6vw, 48px);
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+}
+
+.lluvia-cms-preview-header p {
+  margin: 12px 0 0;
+  color: #607086;
+  font-size: 17px;
+}
+
+.lluvia-cms-preview-body {
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+.lluvia-cms-preview-body p,
+.lluvia-cms-preview-body li {
+  color: #25354a;
+}
+
+.lluvia-cms-preview-body mjx-container[jax="CHTML"][display="true"] {
+  max-width: 100%;
+  margin: 1.5em 0;
+  padding: 18px 14px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  background: #f4f7fb;
+  border-left: 3px solid #4c78a8;
+  border-radius: 8px;
+}
+
+@media (max-width: 600px) {
+  .lluvia-cms-preview {
+    width: calc(100% - 16px);
+    min-height: calc(100vh - 16px);
+    margin: 8px;
+    padding: 28px 20px 40px;
+    border-radius: 12px;
+  }
+}

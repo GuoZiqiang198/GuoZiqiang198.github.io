@@ -27,6 +27,22 @@ YYYY-MM-DD-post-slug.md
 
 Sveltia CMS stores the entered token only in that browser's local storage. Sign out and clear site data on shared or untrusted computers. The public `admin/config.yml` contains repository metadata but no credential.
 
+### Write formulas
+
+Formula rendering is enabled by default for posts and in the browser editor preview. Use either form:
+
+```markdown
+Inline: $E=mc^2$ or \(E=mc^2\)
+
+Display:
+
+$$
+E=mc^2
+$$
+```
+
+Turn off **启用公式** only when a post must treat dollar-delimited text literally.
+
 ## Preview locally
 
 Ruby is installed at `E:\TOOLS\Ruby34-x64`. It was intentionally not added to the permanent Windows `PATH`. In each new PowerShell window, run:
