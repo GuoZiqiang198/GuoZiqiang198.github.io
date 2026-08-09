@@ -1,6 +1,6 @@
 :root {
   --lluvia-ink: #172334;
-  --lluvia-glass: rgba(250, 252, 255, 0.88);
+  --lluvia-glass: rgba(250, 252, 255, 0.78);
   --lluvia-glass-border: rgba(255, 255, 255, 0.48);
   --lluvia-shadow: rgba(3, 10, 21, 0.32);
 }
@@ -37,12 +37,48 @@ body::after {
 }
 
 header.intro-header {
-  background-image:
-    linear-gradient(180deg, rgba(4, 8, 16, 0.18), rgba(5, 10, 20, 0.38)),
-    url("../img/lluvia-site-background.jpg") !important;
-  background-position: center 48% !important;
-  background-size: cover !important;
-  box-shadow: 0 18px 52px rgba(3, 9, 18, 0.28);
+  background: #ffffff !important;
+  box-shadow: 0 1px 0 rgba(23, 35, 52, 0.08), 0 18px 52px rgba(3, 9, 18, 0.18);
+}
+
+header.intro-header .header-mask {
+  background: transparent !important;
+}
+
+header.intro-header .site-heading,
+header.intro-header .post-heading,
+header.intro-header .page-heading,
+header.intro-header .post-heading .meta a,
+header.intro-header .tags a,
+header.intro-header .tags .tag {
+  color: var(--lluvia-ink);
+  text-shadow: none;
+}
+
+header.intro-header .tags a,
+header.intro-header .tags .tag {
+  border-color: rgba(23, 35, 52, 0.55);
+}
+
+header.intro-header .header-img-credit {
+  display: none;
+}
+
+.navbar-custom .navbar-brand,
+.navbar-custom .nav li a {
+  color: var(--lluvia-ink);
+  text-shadow: none;
+}
+
+.navbar-custom .navbar-brand:hover,
+.navbar-custom .navbar-brand:focus,
+.navbar-custom .nav li a:hover,
+.navbar-custom .nav li a:focus {
+  color: #006f88;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: var(--lluvia-ink);
 }
 
 body > .container,
@@ -112,10 +148,6 @@ footer .list-inline a:focus {
     background-position: 50% 46%;
   }
 
-  header.intro-header {
-    background-position: 50% 46% !important;
-  }
-
   header.intro-header .site-heading h1,
   header.intro-header .post-heading h1 {
     max-width: 100%;
@@ -150,7 +182,7 @@ footer .list-inline a:focus {
 @media (prefers-reduced-transparency: reduce) {
   body > .container,
   body > article > .container {
-    background: rgba(250, 252, 255, 0.97);
+    background: rgba(250, 252, 255, 0.86);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
   }

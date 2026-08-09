@@ -117,8 +117,16 @@ def validate() -> None:
         load_front_matter(ROOT / page_name)
 
     background_css = (ROOT / "css" / "lluvia-background.css").read_text(encoding="utf-8")
-    if '../img/lluvia-site-background.jpg' not in background_css or "background-size: cover" not in background_css:
+    if '../img/lluvia-site-background.jpg' not in background_css or "/ cover no-repeat" not in background_css:
         raise ValueError("Global cover background is not configured")
+    if "--lluvia-glass: rgba(250, 252, 255, 0.78);" not in background_css:
+        raise ValueError("Article glass opacity is not configured")
+    if "background: rgba(250, 252, 255, 0.86);" not in background_css:
+        raise ValueError("Reduced-transparency article fallback is not configured")
+    if "background: #ffffff !important;" not in background_css:
+        raise ValueError("Blank intro header is not configured")
+    if "header.intro-header .header-mask" not in background_css or "background: transparent !important;" not in background_css:
+        raise ValueError("Intro header mask is not disabled")
 
     default_layout = (ROOT / "_layouts" / "default.html").read_text(encoding="utf-8")
     if "page-writing-portal" not in default_layout:
